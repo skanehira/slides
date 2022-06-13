@@ -1,3 +1,4 @@
+# yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
 name: deploy
 
 on:
@@ -29,11 +30,16 @@ jobs:
           cp ./contents/${{ steps.slide.outputs.name }}.md .
           npm run build -- ${{ steps.slide.outputs.name }}.md -o ./public/${{ steps.slide.outputs.name }}/ --base /slides/${{ steps.slide.outputs.name }}
           rm -f ${{ steps.slide.outputs.name }}.md
-      - name: Add link to top index.html
+      - name: Add link to index.html
+        id: add_link
         run: |
-          echo '- https://skanehira.github.io/slides/${{ steps.slide.outputs.name }}' >> public/index.md
-          npx marked -o public/index.html -i public/index.md
+          if [ -z "$(grep ${{ steps.slide.outputs.name }} public/index.md)" ]; then
+            echo '- https://skanehira.github.io/slides/${{ steps.slide.outputs.name }}' >> public/index.md
+            npx marked -o public/index.html -i public/index.md
+          fi
+          echo "::set-output name=diff::$(git diff --stat ./public/index.md)"
       - name: Commit changes
+        if: ${{ steps.add_link.diff != '' }}
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: "docs: add ${{ steps.slide.outputs.name }} link"
