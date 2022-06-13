@@ -1,0 +1,44 @@
+name: deploy
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    if: ${{ contains(github.event.head_commit.message, 'deploy') }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Set env
+        id: slide
+        run: |
+          echo "::set-output name=slide_name::$(echo '${{ github.event.head_commit.message }}' | cut -d' ' -f 2)"
+      - name: Build
+        run: |
+          echo ${{ steps.slide.outputs.slide_name }}
+          npm install
+          cp ./contents/${{ steps.slide.outputs.slide_name }}.md .
+          npm run build -- ${{ steps.slide.outputs.slide_name }}.md -o ./public/${{ steps.slide.outputs.slide_name }}/ --base slides/${{ steps.slide.outputs.slide_name }}
+          rm -f ${{ steps.slide.outputs.slide_name }}.md
+      - name: Add link to top index.html
+        run: |
+          echo https://skanehira.github.io/slides/${{ steps.slide.outputs.slide_name }} >> public/index.html
+     #- name: Commit changes
+     #  uses: stefanzweifel/git-auto-commit-action@v4
+     #  with:
+     #    commit_message: "readme: add ${{ env.slide }} link"
+     #    file_pattern: README.md
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public
+          user_name: 'github-actions[bot]'
+          user_email: 'github-actions[bot]@users.noreply.github.com'
+          commit_message: ${{ github.event.head_commit.message }}
