@@ -28,8 +28,8 @@ jobs:
           rm -f ${{ steps.slide.outputs.slide_name }}.md
       - name: Add link to top index.html
         run: |
-          curl -X POST https://api.github.com/markdown/raw -H 'Content-Type: text/plain' \
-            -d '- https://skanehira.github.io/slides/${{ steps.slide.outputs.slide_name }}' >> public/index.md
+          echo '- https://skanehira.github.io/slides/${{ steps.slide.outputs.slide_name }}' >> public/index.md
+          npx marked -o public/index.html -i public/index.md
       - name: Commit changes
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
