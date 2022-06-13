@@ -15,25 +15,28 @@ jobs:
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - name: Set env
+      - name: Set outputs
         id: slide
         run: |
-          echo "::set-output name=slide_name::$(echo '${{ github.event.head_commit.message }}' | cut -d' ' -f 2)"
+          echo "::set-output name=name::$(echo '${{ github.event.head_commit.message }}' | cut -d' ' -f 2)"
+      - uses: actions/cache@v3
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/package-lock.json') }}
       - name: Build
         run: |
-          echo ${{ steps.slide.outputs.slide_name }}
           npm install
-          cp ./contents/${{ steps.slide.outputs.slide_name }}.md .
-          npm run build -- ${{ steps.slide.outputs.slide_name }}.md -o ./public/${{ steps.slide.outputs.slide_name }}/ --base slides/${{ steps.slide.outputs.slide_name }}
-          rm -f ${{ steps.slide.outputs.slide_name }}.md
+          cp ./contents/${{ steps.slide.outputs.name }}.md .
+          npm run build -- ${{ steps.slide.outputs.name }}.md -o ./public/${{ steps.slide.outputs.name }}/ --base /slides/${{ steps.slide.outputs.name }}
+          rm -f ${{ steps.slide.outputs.name }}.md
       - name: Add link to top index.html
         run: |
-          echo '- https://skanehira.github.io/slides/${{ steps.slide.outputs.slide_name }}' >> public/index.md
+          echo '- https://skanehira.github.io/slides/${{ steps.slide.outputs.name }}' >> public/index.md
           npx marked -o public/index.html -i public/index.md
       - name: Commit changes
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          commit_message: "docs: add ${{ steps.slide.outputs.slide_name }} link"
+          commit_message: "docs: add ${{ steps.slide.outputs.name }} link"
           file_pattern: public/index.md
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
