@@ -27,9 +27,7 @@ jobs:
       - name: Build
         run: |
           npm install
-          cp ./contents/${{ steps.slide.outputs.name }}.md .
-          npm run build -- ${{ steps.slide.outputs.name }}.md -o ./public/${{ steps.slide.outputs.name }}/ --base /slides/${{ steps.slide.outputs.name }}/
-          rm -f ${{ steps.slide.outputs.name }}.md
+          bash ./scripts/build.sh ${{ steps.slide.outputs.name }}
       - name: update index.html
         run: |
           bash ./scripts/update_index_html.sh
