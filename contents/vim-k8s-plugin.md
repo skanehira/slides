@@ -134,7 +134,7 @@ layout: two-cols
 # 実装例
 
 ```ts
-const opt = {
+const resource = {
   type: "pods",
   opts: {
     namespace: "all",
@@ -145,7 +145,7 @@ await getResourceAsText(opt);
 ```
 
 ```ts
-const opt = {
+const resource = {
   type: "rs",
   opts: { 
     namespace: "default",
