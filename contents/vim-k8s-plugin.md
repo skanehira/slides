@@ -31,7 +31,30 @@ layout: center
 <br>
 
 - 本発はk8sの話があまり出ません（すいません）
-- k8sを少し勉強した程度の初心者なのでなにか間違ってたら指摘ください
+- k8sを少し勉強した程度の素人なのでなにか間違ってたら指摘ください
+
+---
+layout: two-cols
+
+---
+
+# 自己紹介
+
+<img src="https://i.gyazo.com/8883ce12ad32179a9f3e4722cfd2b09a.png" width=400 style="margin: 10px">
+
+::right::
+
+# <br>
+
+<br>
+
+- 名前：ゴリラ
+- 仕事：（気持ちはバックエンド）エンジニア
+- 趣味：Vim、Go、TypeScript、Rust、k8sで遊んだり、言語処理系実装したり、筋トレしたり...
+- SNSとかやっているので、暇なときに覗いてやってください
+  - Twitter: https://twitter.com/gorilla0513
+  - Github: https://github.com/skanehira
+  - Zenn: https://zenn.dev/skanehira
 
 ---
 layout: center
