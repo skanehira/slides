@@ -12,7 +12,7 @@ download: true
 
 ---
 
-# 思考速度でテキスト編集
+# 思考速度でテキスト編集<br>そしてVimのこれから
 
 <style>
 h1 {
@@ -31,12 +31,8 @@ layout: center
 
 <br>
 
-- Vim と Neovim について
-  - それぞれの違い
-  - 最近の動向
-- 思考速度でテキスト編集(意訳)
-  - テキスト編集の速度を上げる
-  - Vim とテキスト編集の親和性
+- 思考速度でテキスト編集
+- Vimの最近の動向
 
 ---
 layout: two-cols
@@ -54,85 +50,12 @@ layout: two-cols
 <br>
 
 - 名前：ゴリラ
-- 仕事：エンジニア&社長（最近会社を作りました）
+- 仕事：エンジニア（最近会社を作りました）
 - 趣味：好きな技術（Vim、Go、Rust、TypeScript、Wasmなど）を追っかけたり、筋トレしたり
 - SNSも一応やっています
   - Twitter: https://twitter.com/gorilla0513
   - Github: https://github.com/skanehira
   - Zenn: https://zenn.dev/skanehira
-
----
-layout: center
-
----
-
-# Vim と Neovim の違い
-
-## Vim
-- 互換性を大事にしている
-- とても慎重
-- そのため、目新しい機能はあんまり入らない
-  - ※全く入らないわけでない
-
-## Neovim
-- Vimのフォーク
-- モダンな機能を取り入れていく思想
-- そのため、目新しい機能が入ることが多い
-
-## 上記の思想の違いを踏まえて、好きな方を使えば良い
-
----
-layout: center
-
----
-
-# Vim の最近の動向
-
-<br>
-
-- **Vim9 script**
-  - Vim 本体には Vim script という言語が実装されている
-    - プラグインや設定はこの言語で書かれていることがほとんど
-  - 従来の Vim script では互換性を保ちながら性能アップは難しい
-  - なので、互換性を捨てて、新しくTypeScript/Java likeな型付き言語を Vim 本体に実装
-  - Vim9 script の構文はこんな感じ
-    ```vim
-    def MapList(): list<string>
-      var list = ['aa', 'bb', 'cc', 'dd']
-      return range(1, 2)->map((_, v) => list[v])
-    enddef
-    ```
-  - 2つの言語処理系が積んでいるエディタになっている
-    - 他に聞いたことがない(あったら教えてほしい)
-
----
-layout: center
-
----
-
-# Neovim の最近の動向
-
-- **LSP builtin**
-  - 現代の開発では無くてはならないLSPを本体に組み込んだ
-  - これにより、LSPを使うのにプラグインが不要になる
-    - しかしLSPの設定は面倒なので、実態として設定をサポートするプラグインを使っていることが多い
-    - LSP builtin のため、LSP周りの拡張がしやすい = プラグイン作りやすい
-- **TreeSitter builtin**
-  - 従来の syntax highlight は正規表現を使っていた
-    - そのため、正確に色をつけられないケースがある
-  - Atom の syntax highlight で使用されている構文解析技術
-    - 編集したら即解析し構文木を反映する(Incremental Parsing)
-    - 正確に色をつけられるようになった
-  - 構文木が取れるので、構文木を使った拡張が作りやすい
-    - 例えばmarkdownのコードブロックを抽出してコードを実行するなど
-
----
-layout: center
-
----
-
-# 最近の動向は一旦これで終わり...
-# 次はテキスト編集について話しましょう
 
 ---
 layout: center
@@ -170,7 +93,7 @@ layout: center
 
 ---
 
-# テキスト編集時の操作を整理
+# テキスト編集時の操作を整理します
 
 ---
 layout: center
@@ -242,10 +165,6 @@ layout: center
 
 ---
 
-## 具体例2: シグニチャが長い関数のコピー
-
-<br>
-
 `yipGp$T_cegorilla`をもう少し詳しく解説すると...
 
 - `yip`で関数本体を選択してコピー
@@ -263,10 +182,6 @@ layout: center
 
 ---
 
-## 具体例2: シグニチャが長い関数のコピー
-
-<br>
-
 さらに、もう少し詳しく解説すると...
 
 - `yip`は`y`と`ip`に分かれる
@@ -281,9 +196,7 @@ layout: center
 
 ---
 
-## 具体例2: シグニチャが長い関数のコピー
-
-用語をまとめると、次のようになります。
+## 用語をまとめると、次のようになります。
 
 <br>
 
@@ -300,7 +213,7 @@ layout: center
 
 # ポイント
 
-- 操作(オペレーター)と操作対象の範囲(テキストオブジェクト、モーション)選択は、エディタ関係なく普段のテキスト編集でほとんど無意識にみんなやっていること
+- 操作(オペレーター)と操作対象の範囲(テキストオブジェクト、モーション)選択は、<br>エディタ関係なく普段のテキスト編集でほとんど無意識にみんなやっていること
 - Vimはそれを機能まで落とし込んで提供している
 
 ---
@@ -308,7 +221,7 @@ layout: center
 
 ---
 
-# **Vim を使うと考えた通りに編集が可能である**
+# **Vim を使うと思考に沿った編集が可能である**
 # **つまり Vim はテキスト編集と親和性が高い**
 
 ---
@@ -316,7 +229,114 @@ layout: center
 
 ---
 
-# **これが思考速度でテキストを編集するということ**
+# **Vim について興味湧いてきましたか？**
+
+---
+layout: center
+
+---
+
+# **では、そんなVimの動向について少し話しましょう**
+
+---
+layout: center
+
+---
+# Vim と Neovim の違い
+
+## Vim
+- 互換性を大事にしている
+- とても慎重
+- そのため、目新しい機能はあんまり入らない
+  - ※全く入らないわけでない
+
+## Neovim
+- Vimのフォーク
+- モダンな機能を取り入れていく思想
+- そのため、目新しい機能が入ることが多い
+
+## 上記の思想の違いを踏まえて、好きな方を使えば良い
+
+---
+layout: center
+
+---
+
+# **Vim の最近の動向**
+
+---
+layout: center
+
+---
+
+# **Vim9 script**
+- Vim 本体には Vim script という言語が実装されている
+  - プラグインや設定はこの言語で書かれていることがほとんど
+- 従来の Vim script では互換性を保ちながら性能アップは難しい
+- なので、互換性を捨てて、新しくTypeScript/Java likeな型付き言語を Vim 本体に実装
+- Vim9 script の構文はこんな感じ
+  ```vim
+  def MapList(): list<string>
+    var list = ['aa', 'bb', 'cc', 'dd']
+    return range(1, 2)->map((_, v) => list[v])
+  enddef
+  ```
+- 2つの言語処理系が積んでいるエディタになっている
+  - 他に聞いたことがない(あったら教えてほしい)
+
+---
+layout: center
+
+---
+
+# **[denops.vim](https://github.com/vim-denops/denops.vim)**
+- 新しい JS/TS/WASM ランタイムである [Deno](https://deno.land) を使ったプラグインシステム
+  - Vim/Neovim対応
+- JS/TS/WASM/FFIで Vim のプラグインが書ける
+  - Rustなどの他の言語の財産が使える(便利)
+- 最近 Deno が npm サポートしたので、多くの npm モジュールが使えるようになってきた
+  - VS Code の一部財産が使える(便利)
+
+---
+layout: center
+
+---
+
+# **Neovim の最近の動向**
+
+---
+layout: center
+
+---
+# **LSP builtin**
+- 現代の開発では無くてはならないLSPを本体に組み込んだ
+- これにより、LSPを使うのにプラグインが不要になる
+  - しかしLSPの設定は面倒なので、実態として設定をサポートするプラグインを使っていることが多い
+  - LSP builtin のため、LSP周りの拡張がしやすい = プラグイン作りやすい
+
+---
+layout: center
+
+---
+
+# **TreeSitter builtin**
+  - 従来の syntax highlight は正規表現を使っていたため、正確に色をつけられないケースがあった
+  - Atom の syntax highlight で使用されている構文解析技術
+    - 構文木が取れるので、正確に色をつけられるようになった
+    - 編集したら即解析し構文木を反映される(Incremental Parsing)
+  - 構文木を使った拡張が作りやすい
+    - 例えば Markdown のコードブロックを抽出してコードを実行するなど
+
+---
+layout: center
+
+---
+
+# **lua**
+  - Neovim もこれまで Vim script を使ってきたが、lua を切り替わった
+  - もちろん従来の Vim script も使える
+  - モダンなプラグインは lua で書かれていることが多い
+  - これからは lua 一強になっていきそう
 
 ---
 layout: center
@@ -324,12 +344,13 @@ layout: center
 ---
 
 # さいごに
-- 本セッションで紹介したオペレーター・モーションなどはほんの一握りです
+- 本セッションで紹介した内容は本の一握りです
 - Vimについてもっと詳しく知りたい方は手前味噌ですが、以下の連載もしくは本を参考にしてみてください
   - https://knowledge.sakura.ad.jp/21687
   - https://nextpublishing.jp/book/11839.html
 - vim-jp コミュニティの [slack](https://vim-jp.org/docs/chat.html) があるので、こちらで手厚く Vim/Neovim のサポートを受けられます
   - Vim/Neovim 以外にもダイエット、グルメ、技術(Go、Rust、Deno)などといった100を超えるチャンネルがある
+  - Emacsユーザーもいて、楽しく交流している
   - ほんの一部のチャンネルについて紹介されたブログ
     - https://blog.tomoya.dev/posts/vim-jp-is-a-paradise-for-engineers/
     - https://blog.tomoya.dev/posts/tour-de-vim-jp/
